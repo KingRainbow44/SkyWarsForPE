@@ -28,7 +28,7 @@
 
 namespace larryTheCoder\arena;
 
-
+use larryTheCoder\SkyWarsPE;
 use larryTheCoder\utils\Utils;
 use pocketmine\math\Vector3;
 use pocketmine\Server;
@@ -89,13 +89,19 @@ trait ArenaData {
 	public $arenaBroadcastTM = [];
 	public $arenaMoneyReward = 0;
 	public $arenaStartingTime = 0;
+	
+	public $data;
+	
+	public function __construct($data){
+		$this->data = SkyWarsPE::getInstance()->getArenaManager()->getArenaConfig($this->arenaName);
+	}
 
 	/**
 	 * Parses the data for the arena
 	 */
 	public function parseData(){
-		$data = $this->getArenaData();
-
+		$data = $this->data;
+		
 		try{
 			if($data['version'] !== $this->configVersion){
 				throw new \InvalidArgumentException("Unsupported config version for {$this->gameAPICodename}");
