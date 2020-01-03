@@ -245,7 +245,8 @@ class SkyWarsPE extends PluginBase implements Listener {
 	}
 
 	public function getArenaManager(): ArenaManager{
-		return $this->arenaManager;
+		$aM = new ArenaManager();
+		return $this->arenaManager($aM);
 	}
 
 	private function checkLobby(){
